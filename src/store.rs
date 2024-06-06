@@ -10,7 +10,6 @@ use prettytable::{Cell, Row, Table};
 use serde_json::Value;
 
 use crate::error::AppError;
-use crate::input::Platform;
 use crate::model::Item;
 
 #[derive(Debug)]
@@ -26,45 +25,12 @@ impl Store {
         Ok(Store { store: v })
     }
 
-    pub fn remove(
-        &mut self,
-        name: String,
-        platform: Platform,
-        amount: Option<f32>,
-    ) {
-        match amount {
-            Some(amount) => {
-              let mut filtered = self.store.clone()
-              .into_iter()
-              .filter(|item| item.platform == platform && item.name == name)
-              .collect::<Vec<Item>>();
+    pub fn update(&mut self, id: usize, new_price: f32) {
+        self.store[id].price = new_price;
+    }
 
-              let mut remain = amount;
-
-              for i in 0..filtered.len() {
-                if filtered[i].amount > remain {
-                  filtered[i].amount -= remain;
-                  break;
-                } else if filtered[i].amount < remain {
-                  remain -= filtered[i].amount;
-                  filtered.remove(i);
-                } else {
-                  filtered.remove(i);
-                  break;
-                }
-              }
-
-              self.store = filtered;
-            }
-            None => {
-              let filtered = self.store.clone()
-                  .into_iter()
-                  .filter(|item| item.platform == platform && item.name == name)
-                  .collect::<Vec<Item>>();
-
-              self.store = filtered; 
-            }
-        }
+    pub fn remove(&mut self, id: usize) -> Item {
+        self.store.remove(id)
     }
 
     pub fn add(&mut self, item: Item) {
@@ -74,7 +40,9 @@ impl Store {
     pub fn show(&self) {
         let mut table = Table::new();
         let mut current_price = 0.0;
-        table.add_row(row!["NAME", "PRICE", "AMOUNT", "PLATFORM", "VALUE"]);
+        let mut count = 0;
+
+        table.add_row(row!["ID", "NAME", "PRICE", "AMOUNT", "PLATFORM", "VALUE"]);
 
         for row in self.store.iter() {
             let value = &row.price * &row.amount;
@@ -82,20 +50,23 @@ impl Store {
             current_price += value;
 
             table.add_row(Row::new(vec![
+                Cell::new(&count.to_string()),
                 Cell::new(&row.name),
                 Cell::new(&row.price.to_string()),
                 Cell::new(&row.amount.to_string()),
                 Cell::new(&row.platform.to_string()),
                 Cell::new(&value.to_string()),
             ]));
+
+            count += 1;
         }
 
-        let final_cell = Cell::new(&current_price.to_string())
+        let last = Cell::new(&current_price.to_string())
             .with_style(Attr::BackgroundColor(color::RED))
             .with_style(Attr::Italic(true))
             .with_hspan(4);
 
-        table.add_row(row![final_cell]);
+        table.add_row(row![last]);
 
         table.printstd();
     }

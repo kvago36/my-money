@@ -1,6 +1,8 @@
-use clap::{arg, builder::PossibleValue, command, value_parser, Arg, ValueEnum, Args, Parser, Subcommand};
+use clap::{
+    arg, builder::PossibleValue, command, value_parser, Arg, Args, Parser, Subcommand, ValueEnum,
+};
 use serde::{Deserialize, Serialize};
-use serde_json::{Value};
+use serde_json::Value;
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Mode {
@@ -13,7 +15,7 @@ pub enum Mode {
 pub enum Platform {
     Binance,
     ByBit,
-    BitKub
+    BitKub,
 }
 
 impl ValueEnum for Platform {
@@ -87,8 +89,12 @@ pub struct Cli {
 pub enum Commands {
     /// Show current savings
     Show,
+    /// Calculate actives price
+    Price,
     /// Adds files to myapp
     Add(AddArgs),
+    /// Update price
+    Update(UpdateArgs),
     /// Remove item from current savings
     Remove(RemoveArgs),
 }
@@ -98,12 +104,16 @@ pub struct AddArgs {
     pub name: String,
     pub amount: f32,
     pub price: f32,
-    pub platform: Platform
+    pub platform: Platform,
+}
+
+#[derive(Args)]
+pub struct UpdateArgs {
+    pub id: usize,
+    pub new_price: f32,
 }
 
 #[derive(Args)]
 pub struct RemoveArgs {
-    pub name: String,
-    pub platform: Platform,
-    pub amount: Option<f32>,
+    pub id: usize,
 }
