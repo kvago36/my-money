@@ -1,8 +1,7 @@
 use clap::{
-    arg, builder::PossibleValue, command, value_parser, Arg, Args, Parser, Subcommand, ValueEnum,
+    builder::PossibleValue, command, Args, Parser, Subcommand, ValueEnum,
 };
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Mode {
@@ -89,8 +88,6 @@ pub struct Cli {
 pub enum Commands {
     /// Show current savings
     Show,
-    /// Calculate actives price
-    Price,
     /// Adds files to myapp
     Add(AddArgs),
     /// Update price

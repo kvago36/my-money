@@ -1,1 +1,51 @@
-[{"name":"TON","amount":0.5,"platform":"Binance","price":4.0,"date":"01.01.2014"},{"name":"test","amount":0.2,"platform":"Binance","price":0.015,"date":"2024-06-04 15:19:50.212467 UTC"},{"name":"test","amount":0.2,"platform":"Binance","price":0.016,"date":"2024-06-04 15:22:33.667458 UTC"},{"name":"aap","amount":10.2,"platform":"BitKub","price":1.26,"date":"2024-06-04 15:37:08.313962 UTC"}]
+[
+  {
+    "name": "TON",
+    "amount": 12.0,
+    "platform": "Binance",
+    "price": 4.0,
+    "date": "01.01.2014"
+  },
+  {
+    "name": "BTC",
+    "amount": 1.0,
+    "platform": "Binance",
+    "price": 80000.0,
+    "date": "01.01.2014"
+  },
+  {
+    "name": "BNB",
+    "amount": 4.0,
+    "platform": "Binance",
+    "price": 2.15,
+    "date": "2024-06-04 15:19:50.212467 UTC"
+  },
+  {
+    "name": "BNB",
+    "amount": 7.0,
+    "platform": "Binance",
+    "price": 4.45,
+    "date": "2024-05-01 12:43:10.324591 UTC"
+  },
+  {
+    "name": "test",
+    "amount": 0.2,
+    "platform": "Binance",
+    "price": 0.016,
+    "date": "2024-06-04 15:22:33.667458 UTC"
+  },
+  {
+    "name": "aap",
+    "amount": 10.2,
+    "platform": "BitKub",
+    "price": 1.26,
+    "date": "2024-06-04 15:37:08.313962 UTC"
+  },
+  {
+    "name": "foo",
+    "amount": 0.2,
+    "platform": "Binance",
+    "price": 1.0,
+    "date": "2024-06-12 07:42:38.379085 UTC"
+  }
+]

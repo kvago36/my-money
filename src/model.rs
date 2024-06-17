@@ -25,3 +25,16 @@ impl Item {
         }
     }
 }
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct Rates {
+    pub asset_id_base: String,
+    pub rates: Vec<Rate>,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct Rate {
+    pub time: String,
+    pub asset_id_quote: String,
+    pub rate: f32,
+}
